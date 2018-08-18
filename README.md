@@ -5,6 +5,9 @@ A versão utilizada para desenvolver o aplicativo foi a v.6 do Android.
 ## Importante - Links de apoio para desenvolvimento:
 * ListView - Gostaria de fazer algo semelhante a isso -> https://www.youtube.com/watch?v=YL1VpGBj3R0
 * Firebase - Esse cara tem muita coisa sobre firebase ver canal -> https://www.youtube.com/watch?v=T_NL90Kc8H0
+  * Insert data on firebase - https://www.youtube.com/watch?v=xnFnwbiDFuE
+  * Salvar imagem no firebase - https://www.youtube.com/watch?v=mPOhnTnLcSY
+  * Login fire base - https://www.youtube.com/watch?v=xnFnwbiDFuE
 * Camera API - O cara utiliza a CameraAPI2 - Não implementado -> https://www.youtube.com/watch?v=oPu42I0HSi4
 * MaterialDesign - Brinquei nesse canal - https://www.youtube.com/channel/UCoQp_Duwqh0JWEZrg4DT2Ug
 
