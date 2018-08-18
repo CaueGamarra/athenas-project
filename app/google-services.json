@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "161787640341-6dug506f4oab4rf186eo2rj0f786sd2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.athenas.am.athenas",
+            "certificate_hash": "a89705668627d2ec83e5c79cbbe955aff55160ac"
+          }
+        },
+        {
           "client_id": "161787640341-1o0lf7hm04j276e9cq8o62jr9h71dcme.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161787640341-1o0lf7hm04j276e9cq8o62jr9h71dcme.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
