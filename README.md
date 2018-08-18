@@ -21,6 +21,6 @@ Foi feito uma validação simples para simular o login no app adm@athenas 123
 
 ## DOING:
 
-##DONE:
+## DONE:
 * Criação de pagina de login;
-* Criação de
+* Criação de homepage;
