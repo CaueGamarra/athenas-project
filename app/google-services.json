@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "161787640341",
+    "firebase_url": "https://athenas-a7df8.firebaseio.com",
+    "project_id": "athenas-a7df8",
+    "storage_bucket": "athenas-a7df8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161787640341:android:b156e68794fb2a0c",
+        "android_client_info": {
+          "package_name": "com.athenas.am.athenas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161787640341-1o0lf7hm04j276e9cq8o62jr9h71dcme.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDELke8RB4CsO_lTGdV0rAh6s9rpzjHHnI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
