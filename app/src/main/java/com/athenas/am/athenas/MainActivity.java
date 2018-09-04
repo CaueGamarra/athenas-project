@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //@TODO - CRIAR CLASSES E AJUSTAR O SWITCH - AJUSTAR O CICLO DE VIDA DA ACTIVITY
             case R.id.image_card: i = new Intent(this, CameraActivity.class); startActivity(i); break;
             case R.id.audio_card: i = new Intent(this, CameraActivity.class); startActivity(i); break;
-            case R.id.notebook_card: i = new Intent(this, CameraActivity.class); startActivity(i); break;
+            case R.id.notebook_card: i = new Intent(this, NotebookActivity.class); startActivity(i); break;
             default: break;
         }
     }

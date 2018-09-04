@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotebookActivity">
+
+    <EditText
+        android:id="@+id/edit_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="title"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="35dp" />
+
+    <EditText
+        android:id="@+id/edit_text_Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="description"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_title"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp" />
+    <EditText
+        android:id="@+id/edit_text_priority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="priority"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_Description"
+
+        android:inputType="number"/>
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:onClick="addNote"
+        android:text="Adicionar Nota"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_priority"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/btn_load"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="loadNotes"
+        android:text="Load"
+        app:layout_constraintTop_toBottomOf="@+id/btn_save"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/btn_load"
+        tools:layout_editor_absoluteX="8dp">
+
+        <TextView
+            android:id="@+id/text_view_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="16dp" />
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
