@@ -20,7 +20,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".CameraActivity" />
-        <activity android:name=".NotebookActivity"></activity>
+        <activity android:name=".NotebookActivity"
+                    android:parentActivityName=".ListNotebooksActivity"/>
+        <activity android:name=".ListNotebooksActivity"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

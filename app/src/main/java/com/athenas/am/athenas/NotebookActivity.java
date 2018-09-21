@@ -4,8 +4,14 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,104 +38,71 @@ import java.util.Map;
 
 public class NotebookActivity extends AppCompatActivity {
 
-    private static final String TAG = "NotebookActivity";
-    private static final String KEY_TITLE = "title";
-    private static final String KEY_DESCRIPTION = "description";
-
-    private EditText edtTextTitle;
-    private EditText edtTextDescription;
-    private EditText edtTextPriority;
-
-    private TextView textViewData;
+    private EditText edtTextTitle, edtTextDescription;
+    Button btnAddNote;
+    ProgressBar addNoteProgress;
+    private NumberPicker numberPickerPriority;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference notebookRef = db.collection("Notebook");
-    private DocumentReference noteRef = db.collection("Notebook").document("My First Note");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notebook);
 
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+
         edtTextTitle = findViewById(R.id.edit_text_title);
         edtTextDescription = findViewById(R.id.edit_text_Description);
-        edtTextPriority = findViewById(R.id.edit_text_priority);
-        textViewData = findViewById(R.id.text_view_data);
+        numberPickerPriority = findViewById(R.id.number_pick_priority);
+        numberPickerPriority.setMinValue(1);
+        numberPickerPriority.setMaxValue(10);
 
-    }
+        btnAddNote = findViewById(R.id.btn_add_note);
+        addNoteProgress = findViewById(R.id.add_note_progressBar);
+        addNoteProgress.setVisibility(View.INVISIBLE);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        notebookRef.orderBy("priority", Query.Direction.DESCENDING)
-                .addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+        btnAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
-                if(e !=null){
-                    return;
-                }
-                String data= "";
-                for(QueryDocumentSnapshot documentSnapshots: queryDocumentSnapshots){
-                    Note note = documentSnapshots.toObject(Note.class);
-                    note.setDocumentId(documentSnapshots.getId());
-
-                    String documentId = note.getDocumentId();
-                    String title = note.getTitle();
-                    String description = note.getDescription();
-                    int priority = note.getPriority();
-                    data+= "DocumentId"+documentId
-                            +"\nTitle: "+title+"\nDescription"+description
-                            +"\nPriority: "+priority+"\n\n";
-                }
-
-                textViewData.setText(data);
+            public void onClick(View v) {
+                addNoteProgress.setVisibility(View.VISIBLE);
+                btnAddNote.setVisibility(View.INVISIBLE);
+                saveNote();
             }
         });
     }
 
-    public void addNote(View v){
-        String title = edtTextTitle.getText().toString();
-        String description = edtTextDescription.getText().toString();
-        if (edtTextPriority.length() == 0){
-            edtTextPriority.setText("0");
-        }
-        int priority = Integer.parseInt(edtTextPriority.getText().toString());
-
-        Note note = new Note(title, description, priority);
-
-        notebookRef.add(note); //Adicionar feedback onSuccsessListener
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.new_notebook_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.save_note:
+                saveNote();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-    public void loadNotes(View v){
-       Task task1 = notebookRef.whereGreaterThan("priority",2)
-               .orderBy("priority")
-               .get();
-       Task task2 = notebookRef.whereLessThan("priority",2)
-               .orderBy("priority")
-               .get();
-       Task<List<QuerySnapshot>> allTasks = Tasks.whenAllSuccess(task1,task2);
-       allTasks.addOnSuccessListener(new OnSuccessListener<List<QuerySnapshot>>() {
-           @Override
-           public void onSuccess(List<QuerySnapshot> querySnapshots) {
-                   String data ="";
+    private void saveNote() {
+        String title = edtTextTitle.getText().toString();
+        String description = edtTextDescription.getText().toString();
+        int priority = numberPickerPriority.getValue();
 
-                   for(QuerySnapshot queryDocumentSnapshots: querySnapshots){
-                       for(QueryDocumentSnapshot documentSnapshots: queryDocumentSnapshots){
-                           Note note = documentSnapshots.toObject(Note.class);
-                           note.setDocumentId(documentSnapshots.getId());
-
-                           String documentId = note.getDocumentId();
-                           String title = note.getTitle();
-                           String description = note.getDescription();
-                           int priority = note.getPriority();
-                           data+= "DocumentId"+documentId
-                                   +"\nTitle: "+title+"\nDescription"+description
-                                   +"\nPriority: "+priority+"\n\n";
-                       }
-                   }
-                   textViewData.setText(data);
-           }
-       });
+        if (title.trim().isEmpty()) {
+            Toast.makeText(this, "Por favor insira um Nome para o caderno", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        CollectionReference notebookRef = FirebaseFirestore.getInstance().collection("Notebook");
+        notebookRef.add(new Note(title, description, priority));
+        Toast.makeText(this, "Caderno Criado", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
